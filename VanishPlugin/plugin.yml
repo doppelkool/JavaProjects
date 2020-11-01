@@ -4,4 +4,4 @@ main: de.doppelkool.main.Main
 commands:
    vanish:
       usage: /<command>
-      description: Du wirst komplett unsichtbar
+      description: Du wirst komplett unsichtbar/sichtbar
