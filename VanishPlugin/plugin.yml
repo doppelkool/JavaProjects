@@ -1,0 +1,7 @@
+name: VanishPlugin
+version: 1.0
+main: de.doppelkool.main.Main
+commands:
+   vanish:
+      usage: /<command>
+      description: Du wirst komplett unsichtbar
