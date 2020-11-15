@@ -10,7 +10,8 @@ import de.doppelkool.main.Main;
 public class JoinListener implements Listener{
 	
 	@EventHandler
-    public void PlayerJoin(PlayerJoinEvent e){
+    public void PlayerJoin(PlayerJoinEvent e)
+	{
         Player player = e.getPlayer();
         for (int i = 0; i < Main.getplugin().invisible_list.size(); i++){
             player.hidePlayer(Main.getplugin().invisible_list.get(i));

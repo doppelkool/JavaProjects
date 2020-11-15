@@ -17,24 +17,27 @@ public class VanishCommand implements CommandExecutor{
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
-		if (sender instanceof Player){
+		if (sender instanceof Player)
+		{
             Player player = (Player) sender;
             if(player.hasPermission("vanish.use"))
             {
                 if (invisible_list.contains(player)){
-                    for (Player people : Bukkit.getOnlinePlayers()){
+                    for (Player people : Bukkit.getOnlinePlayers())
+                    {
                         people.showPlayer(player);
                     }
                     invisible_list.remove(player);
-                    Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "dynmap show " + player.getName());
                     player.sendMessage("§aDu bist wieder sichtbar!");
-                }else if(!invisible_list.contains(player)){
-                    for (Player people : Bukkit.getOnlinePlayers()){
+                }
+                else if(!invisible_list.contains(player))
+                {
+                    for (Player people : Bukkit.getOnlinePlayers())
+                    {
                     	if(people.hasPermission("vanish.bypass"))
                         people.hidePlayer(player);
                     }
                     invisible_list.add(player);
-                    Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "dynmap hide " + player.getName());
                     player.sendMessage("§cDu bist nun unsichtbar!");
                 }
             }
