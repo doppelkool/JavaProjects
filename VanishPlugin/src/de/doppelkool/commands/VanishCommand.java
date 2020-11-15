@@ -7,6 +7,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 
 public class VanishCommand implements CommandExecutor{
@@ -17,22 +19,24 @@ public class VanishCommand implements CommandExecutor{
 
 		if (sender instanceof Player){
             Player player = (Player) sender;
-            if (invisible_list.contains(player)){
-                for (Player people : Bukkit.getOnlinePlayers()){
-                    people.showPlayer(player);
+            if(player.hasPermission("vanish.use"))
+            {
+                if (invisible_list.contains(player)){
+                    for (Player people : Bukkit.getOnlinePlayers()){
+                        people.showPlayer(player);
+                    }
+                    invisible_list.remove(player);
+                    Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "dynmap show " + player.getName());
+                    player.sendMessage("§aDu bist wieder sichtbar!");
+                }else if(!invisible_list.contains(player)){
+                    for (Player people : Bukkit.getOnlinePlayers()){
+                    	if(people.hasPermission("vanish.bypass"))
+                        people.hidePlayer(player);
+                    }
+                    invisible_list.add(player);
+                    Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "dynmap hide " + player.getName());
+                    player.sendMessage("§cDu bist nun unsichtbar!");
                 }
-                invisible_list.remove(player);
-                Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "dynmap show " + player.getName());
-                Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "btlp hide off " + player.getName());
-                player.sendMessage("§aDu bist wieder sichtbar!");
-            }else if(!invisible_list.contains(player)){
-                for (Player people : Bukkit.getOnlinePlayers()){
-                    people.hidePlayer(player);
-                }
-                invisible_list.add(player);
-                Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "dynmap hide " + player.getName());
-                Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "btlp hide on " + player.getName());
-                player.sendMessage("§cDu bist nun unsichtbar!");
             }
         }
 		return true;

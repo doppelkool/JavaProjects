@@ -12,7 +12,7 @@ import de.doppelkool.listeners.JoinListener;
 
 public class Main extends JavaPlugin
 {
-    public ArrayList<Player> invisible_list = new ArrayList<>();
+	public ArrayList<Player> invisible_list = new ArrayList<>();
 	private static Main plugin;
 	public void onEnable()
 	{
